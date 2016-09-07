@@ -1,4 +1,5 @@
 [![Release](https://jitpack.io/v/dilbertside/BOD.svg)](https://jitpack.io/#dilbertside/BOD)
+[![Build Status](https://travis-ci.org/dilbertside/BOD.svg)](https://travis-ci.org/dilbertside/BOD)
 
 # BOD
 
