@@ -6,4 +6,4 @@ branches:
   except:
     - /^test.*/i
 
-install: 'mvn clean package --quiet'
+install: 'mvn clean test package --quiet'
