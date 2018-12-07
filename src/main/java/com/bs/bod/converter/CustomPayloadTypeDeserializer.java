@@ -1,9 +1,10 @@
 /**
- * 
+ * CustomPayloadTypeDeserializer
  */
 package com.bs.bod.converter;
 
 import java.io.IOException;
+import java.util.Collection;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.BeanProperty;
@@ -15,15 +16,16 @@ import com.fasterxml.jackson.databind.jsontype.TypeDeserializer;
 import com.fasterxml.jackson.databind.jsontype.TypeIdResolver;
 import com.fasterxml.jackson.databind.jsontype.impl.AsPropertyTypeDeserializer;
 import com.fasterxml.jackson.databind.node.TreeTraversingParser;
-import com.fasterxml.jackson.databind.type.SimpleType;
+import com.fasterxml.jackson.databind.type.TypeFactory;
 
 /**
  * from http://www.dilipkumarg.com/dynamic-polymorphic-type-handling-jackson/
  * 
  * @author dbs on Dec 30, 2015 5:16:06 PM
  *
- * @version 1.0
  * @since 0.0.3
+ * @version 1.0
+ * @version 1.1 fixed error form upgrade to 2.9.6
  * 
  */
 public class CustomPayloadTypeDeserializer extends AsPropertyTypeDeserializer {
@@ -32,7 +34,7 @@ public class CustomPayloadTypeDeserializer extends AsPropertyTypeDeserializer {
 
   public CustomPayloadTypeDeserializer(final JavaType bt, final TypeIdResolver idRes, final String typePropertyName, final boolean typeIdVisible,
       final Class<?> defaultImpl) {
-    super(bt, idRes, typePropertyName, typeIdVisible, defaultImpl);
+    super(bt, idRes, typePropertyName, typeIdVisible, TypeFactory.defaultInstance().constructFromCanonical(defaultImpl.getCanonicalName()));
   }
 
   public CustomPayloadTypeDeserializer(final AsPropertyTypeDeserializer src, final BeanProperty property) {
@@ -48,8 +50,8 @@ public class CustomPayloadTypeDeserializer extends AsPropertyTypeDeserializer {
   public Object deserializeTypedFromObject(final JsonParser jp, final DeserializationContext ctxt) throws IOException {
     JsonNode node = jp.readValueAsTree();
     Class<?> subType = findSubType(node);
-    JavaType type = SimpleType.construct(subType);
-
+    JavaType type = //com.fasterxml.jackson.databind.type.SimpleType.construct(subType);
+    TypeFactory.defaultInstance().constructParametricType(Collection.class, subType);
     JsonParser jsonParser = new TreeTraversingParser(node, jp.getCodec());
     if (jsonParser.getCurrentToken() == null) {
       jsonParser.nextToken();
@@ -62,7 +64,7 @@ public class CustomPayloadTypeDeserializer extends AsPropertyTypeDeserializer {
      * (Map.class), losing actual type in process (getting SimpleType of Map.class which will not work as expected)
      */
     if (_baseType != null && _baseType.getClass() == type.getClass()) {
-      type = _baseType.narrowBy(type.getRawClass());
+      type = _baseType.forcedNarrowBy(type.getRawClass());
     }
     JsonDeserializer<Object> deser = ctxt.findContextualValueDeserializer(type, _property);
     return deser.deserialize(jsonParser, ctxt);
