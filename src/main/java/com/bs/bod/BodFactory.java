@@ -41,8 +41,8 @@ public class BodFactory {
    *          {@link com.bs.bod.Bod#__sharedPrivateKey}, default is <strong>changeme</strong>
    */
   public static void init(final String sysEnvCode, final String logicalId, final String componentId, final String taskId, final String referenceId, final ConfirmationCode confirmationCode,
-  		final String authorizationId, final String privateKey) {
-  	init(logicalId, componentId, confirmationCode, privateKey);
+      final String authorizationId, final String privateKey) {
+    init(logicalId, componentId, confirmationCode, privateKey);
     Bod.__sysEnvCode = sysEnvCode;
     Sender.__taskId = taskId;
     Sender.__referenceId = referenceId;
@@ -62,7 +62,7 @@ public class BodFactory {
    *          {@link com.bs.bod.Sender#confirmationCode}, default is <strong>never</strong>
    */
   public static void init(final String sysEnvCode, final String logicalId, final String componentId, final ConfirmationCode confirmationCode) {
-  	init(logicalId, componentId, confirmationCode);
+    init(logicalId, componentId, confirmationCode);
     Bod.__sysEnvCode = sysEnvCode;
   }
 
@@ -111,7 +111,7 @@ public class BodFactory {
   /**
    * Helper to build a ready made {@link Bod} with following main properties:<br>
    * <li>Conversation mode: <strong>OnError</strong> {@link com.bs.bod.ConfirmationCode}</li>
-   * <li>verb action: <strong>push</strong> {@link com.bs.bod.VerbEnum#push}</li>
+   * <li>verb action: <strong>load</strong> {@link com.bs.bod.VerbEnum#load}</li>
    * <br> 
    * @param payload {@link Object} to serialize in JSON
    * @return a new {@link Bod}, never null
