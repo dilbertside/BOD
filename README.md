@@ -33,7 +33,7 @@ To use it in your Maven build add:
   <dependency>
     <groupId>com.github.dilbertside</groupId>
     <artifactId>BOD</artifactId>
-    <version>0.2.2</version>
+    <version>0.2.3</version>
   </dependency>
 ```
 
@@ -55,6 +55,6 @@ repositories {
 
 
 ```
-  implementation group: 'com.github.dilbertside', name: 'BOD', version: '0.2.2'
+  implementation group: 'com.github.dilbertside', name: 'BOD', version: '0.2.3'
 ```
 
