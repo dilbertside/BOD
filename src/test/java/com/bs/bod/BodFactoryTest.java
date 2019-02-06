@@ -1,9 +1,7 @@
 /**
- * BizObjectDocFactoryTest
+ * BodFactoryTest
  */
 package com.bs.bod;
-
-import static org.junit.Assert.*;
 
 import java.io.IOException;
 import java.text.DateFormat;
@@ -14,14 +12,15 @@ import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang3.RandomStringUtils;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 
+import static org.junit.jupiter.api.Assertions.*;
 /**
  * @author dbs
  *
@@ -32,7 +31,7 @@ public class BodFactoryTest {
   /**
    * @throws java.lang.Exception
    */
-  @Before
+  @BeforeEach
   public void setUp() throws Exception {
     mapper.enable(SerializationFeature.INDENT_OUTPUT);
     mapper.enableDefaultTyping(); // default to using DefaultTyping.OBJECT_AND_NON_CONCRETE
@@ -42,7 +41,7 @@ public class BodFactoryTest {
   /**
    * @throws java.lang.Exception
    */
-  @After
+  @AfterEach
   public void tearDown() throws Exception {
   }
 
