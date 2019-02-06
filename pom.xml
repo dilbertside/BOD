@@ -8,7 +8,7 @@
     <relativePath></relativePath>
   </parent>
   <artifactId>BOD</artifactId>
-  <version>0.2.4</version>
+  <version>0.2.5</version>
   <packaging>jar</packaging>
   <name>Business Object Document</name>
   <description>In order to achieve inter-operability between disparate systems, disparate companies and disparate supply chains, there must be a common horizontal message architecture that provides a common understanding for all.</description>
